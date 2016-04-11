@@ -144,7 +144,7 @@ private func lensTemplate(sequence: [Token], _ part: KeyTypeTuple) -> String {
         }
         return template + ")}"
     }
-    return "let \(key)Lens = Lens<\(whole), \(part)>(get: {$0.\(key)}, set: \(setMethodTemplate(sequence, key)))"
+    return "let \(key)Lens = Lens<\(whole), \(part)>(\nget: {$0.\(key)}, \nset: \(setMethodTemplate(sequence, key))\n)\n"
 }
 
 private func lensParser(string: String) -> String {
@@ -166,8 +166,6 @@ private func lensParser(string: String) -> String {
 func main(model: String){
     print(lensParser(model))
 }
-
-
 
 
 
