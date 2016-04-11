@@ -27,7 +27,7 @@ let favoriteFilterLens = Lens<AppState, Bool>(
 
 API 
 ```swift
-main("typealias AppState = (theme: String, font: String, favoriteFilter: Bool)")
+main("typealias AppState = (theme: ColorTheme, font: Font, favoriteFilter: Bool)")
 ```
 
 
