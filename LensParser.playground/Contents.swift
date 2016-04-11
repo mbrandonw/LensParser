@@ -147,13 +147,16 @@ private func lensTemplate(sequence: [Token], _ part: KeyTypeTuple) -> String {
     return "let \(key)Lens = Lens<\(whole), \(part)>(get: {$0.\(key)}, set: \(setMethodTemplate(sequence, key)))"
 }
 
-private func lensParser(string: String) -> [String] {
+private func lensParser(string: String) -> String {
     let sequence = tokenizer(string)
     let tuples = keyTypeTuples(sequence)
     return tuples
         .map{ tuple in
             lensTemplate(sequence, tuple)
-    }
+        }
+        .reduce(""){ accum, lens in
+            return accum + "\n" + lens
+        }
 }
 
 //
@@ -163,6 +166,7 @@ private func lensParser(string: String) -> [String] {
 func main(model: String){
     print(lensParser(model))
 }
+
 
 
 
